@@ -7,7 +7,8 @@
 # firstname.lastname@telecom-paristech.fr
 
 import numpy as np
-from bcd_multitask_lasso_fast import bcd_fast
+
+from gsr.bcd_multitask_lasso_fast import bcd_fast
 
 NO_SCREENING = 0
 
@@ -138,7 +139,6 @@ def multitask_lasso_path(X, y, screen=NO_SCREENING, beta_init=None,
 
     if screen == DGST3:
 
-        # print "j_star = ", j_star
         n_DGST3 = [X[:, j_star] * np.dot(X[:, j_star].T, y[:, k]) / lambdas[0]
                    for k in range(n_tasks)]
         n_DGST3 = np.array(n_DGST3).T

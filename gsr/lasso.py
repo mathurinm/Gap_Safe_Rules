@@ -1,6 +1,8 @@
 import numpy as np
+
 from numpy.linalg import norm
-from cd_lasso_fast import cd_lasso
+
+from gsr.cd_lasso_fast import cd_lasso
 
 NO_SCREENING = 0
 
@@ -177,7 +179,7 @@ def lasso_path(X, y, lambdas, eps=1e-4, max_iter=3000, f=10, screening=1,
 
         if abs(gaps[t]) > tol:
 
-            print "warning: did not converge, t = ", t
-            print "gap = ", gaps[t], "eps = ", eps
+            print("warning: did not converge, t = ", t)
+            print("gap = ", gaps[t], "eps = ", eps)
 
     return betas, gaps, n_iters, n_active_features
