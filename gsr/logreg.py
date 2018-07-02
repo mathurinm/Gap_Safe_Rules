@@ -94,9 +94,10 @@ def logreg_path(X, y, lambdas, eps=1e-4, max_iter=3000, f=10, screening=0,
     n_lambdas = len(lambdas)
 
     n_samples, n_features = X.shape
-    n_1 = np.sum(y == 1)
-    n_0 = n_samples - n_1
-    tol = eps * max(1, min(n_1, n_0)) / float(n_samples)
+    # n_1 = np.sum(y == 1)
+    # n_0 = n_samples - n_1
+    # tol = eps * max(1, min(n_1, n_0)) / float(n_samples)
+    tol = eps
 
     betas = np.zeros((n_lambdas, n_features))
     beta_init = np.zeros(n_features, dtype=float, order='F')
