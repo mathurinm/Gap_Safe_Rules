@@ -233,7 +233,7 @@ def cd_logreg(double[::1, :] X, double[:] y, double[:] beta,
               double[:] residual, int[:] disabled_features, double nrm2_y,
               double[:] norm_X2, double lambda_, double lambda_prec,
               double tol, double dual_scale, int max_iter, int f,
-              int screening, int wstr_plus=0):
+              int screening, int wstr_plus=0, int use_linesearch=0):
     """
         Solve ? + lambda_ ||beta||_1
     """
@@ -363,10 +363,13 @@ def cd_logreg(double[::1, :] X, double[:] y, double[:] beta,
                                        & beta[0], lambda_, & disabled_features[0],
                                        norm1_beta, n_samples, n_features)
 
-                    alpha_j = step_size(beta, beta_next, y, X, Xbeta, Xbeta_next,
-                                        exp_Xbeta_next, beta_prox_j, delta_j, p_obj,
-                                        norm1_beta, XTR[j], lambda_, & disabled_features[0],
-                                        n_samples, n_features, j)
+                    if use_linesearch:
+                        alpha_j = step_size(beta, beta_next, y, X, Xbeta, Xbeta_next,
+                                            exp_Xbeta_next, beta_prox_j, delta_j, p_obj,
+                                            norm1_beta, XTR[j], lambda_, & disabled_features[0],
+                                            n_samples, n_features, j)
+                    else:
+                        alpha_j = 1.
 
                     # Update beta[j]
                     beta[j] = beta[j] + alpha_j * delta_j

@@ -18,7 +18,7 @@ SAFE_STRONG_RULE = 666
 
 
 def logreg_path(X, y, lambdas, eps=1e-4, max_iter=3000, f=10, screening=0,
-                warm_start_plus=False):
+                warm_start_plus=False, use_linesearch=False):
 
     """Compute l1-regularized logistic regression path with coordinate descent
 
@@ -149,7 +149,7 @@ def logreg_path(X, y, lambdas, eps=1e-4, max_iter=3000, f=10, screening=0,
             cd_logreg(X, y, beta_init, XTR, Xbeta, exp_Xbeta, residual,
                       disabled_features, nrm2_y, norm_X2,
                       lambdas[t], lambda_prec, tol, dual_scale, max_iter, f,
-                      screening, wstr_plus=0)
+                      screening, wstr_plus=0, use_linesearch=use_linesearch)
 
         betas[t, :] = beta_init.copy()
         if t == 0 and screening != NO_SCREENING:
